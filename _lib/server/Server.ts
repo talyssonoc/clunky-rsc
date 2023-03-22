@@ -1,11 +1,15 @@
 import { join } from "node:path";
 import fastify, { FastifyInstance } from "fastify";
 import { Routes } from "../pages/Routes";
-import { createHandlerFactory, RouteComponent } from "../pages/Handler";
+import {
+  createHandlerFactory,
+  AppComponent,
+  RouteComponent,
+} from "../pages/Handler";
 
 type ServerDependencies = {
   routes: Routes;
-  reactApp: RouteComponent;
+  reactApp: AppComponent;
   appDir: string;
 };
 

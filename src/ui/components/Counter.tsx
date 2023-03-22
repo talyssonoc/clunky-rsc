@@ -1,7 +1,11 @@
 "use client";
 import * as React from "react";
 
-export default function Counter() {
+type CounterProps = {
+  children: React.ReactNode;
+};
+
+export default function Counter({ children }: CounterProps) {
   const [count, setCount] = React.useState(0);
 
   function increase() {
@@ -10,6 +14,7 @@ export default function Counter() {
 
   return (
     <div>
+      {children}
       {count}
       <button onClick={increase}>Increase</button>
     </div>

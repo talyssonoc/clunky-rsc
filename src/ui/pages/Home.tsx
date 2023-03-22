@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { fetch } from "../../../_lib/client/reactFetch";
 import Counter from "../components/Counter";
+import { ServerTime } from "../components/ServerTime";
 
 async function Home() {
   const data = await getData();
@@ -8,7 +9,10 @@ async function Home() {
   return (
     <div>
       Teste {data.ok}
-      <Counter />
+      <Counter>
+        {/* @ts-expect-error Async Server Component */}
+        <ServerTime />
+      </Counter>
       <Suspense fallback={<div>Loading</div>}>
         <HomeContent />
       </Suspense>

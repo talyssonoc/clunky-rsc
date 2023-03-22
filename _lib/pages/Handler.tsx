@@ -13,12 +13,16 @@ type RoutePayload = {
   query: FastifyRequest["params"];
 };
 
-type RouteComponent =
-  | React.ComponentType<RoutePayload>
-  | ((props: RoutePayload) => Promise<React.ReactElement>);
+type RouteComponent<Props = RoutePayload> =
+  | React.ComponentType<Props>
+  | ((props: Props) => Promise<React.ReactElement>);
+
+type AppComponent = RouteComponent<
+  RoutePayload & { children: React.ReactNode }
+>;
 
 type createHandlerFactoryDependencies = {
-  ReactApp: RouteComponent;
+  ReactApp: AppComponent;
   appDir: string;
 };
 
@@ -42,7 +46,7 @@ function createHandlerFactory({
         return;
       }
 
-      renderReactShell(reply, routePayload);
+      renderReactShell(reply, routePayload, pageComponent);
     };
 
     return handler;
@@ -66,12 +70,13 @@ function createHandlerFactory({
 
   async function renderReactShell(
     reply: FastifyReply,
-    routePayload: RoutePayload
+    routePayload: RoutePayload,
+    PageComponent: RouteComponent
   ) {
     const { pipe } = ReactDOMServer.renderToPipeableStream(
       /* @ts-expect-error Async Server Component */
       <ReactApp {...routePayload} />,
-      {
+      /* <PageComponent {...routePayload} /> */ {
         bootstrapScripts: ["/build/main.js"],
       }
     );
@@ -102,4 +107,4 @@ async function getModuleMap(appDir: string) {
 }
 
 export { createHandlerFactory };
-export type { RouteComponent };
+export type { AppComponent, RouteComponent };
