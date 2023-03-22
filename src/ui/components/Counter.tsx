@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 
 export default function Counter() {
@@ -14,5 +15,3 @@ export default function Counter() {
     </div>
   );
 }
-
-// export { Counter };

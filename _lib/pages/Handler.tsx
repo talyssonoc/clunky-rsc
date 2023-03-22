@@ -4,7 +4,7 @@ import * as React from "react";
 // @ts-ignore
 import * as ReactDOMServer from "react-dom/server";
 // @ts-ignore
-import * as ReactDOMServerWebpack from "react-server-dom-webpack/writer";
+import * as ReactDOMServerWebpack from "react-server-dom-webpack/server";
 import { FastifyReply, FastifyRequest, RouteHandlerMethod } from "fastify";
 import { ROUTE_PAYLOAD_HEADER } from "../shared/routePayloadHeader";
 

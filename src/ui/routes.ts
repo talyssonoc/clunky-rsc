@@ -1,6 +1,6 @@
 import { Routes } from "../../_lib/pages/Routes";
-import { Entry } from "./pages/Entry.server";
-import { Home } from "./pages/Home.server";
+import { Entry } from "./pages/Entry";
+import { Home } from "./pages/Home";
 
 const routes = {
   "/": Home,

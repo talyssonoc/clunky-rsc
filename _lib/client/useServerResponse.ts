@@ -1,7 +1,8 @@
+"use client";
 // @ts-ignore
 import { unstable_getCacheForType } from "react";
 // @ts-ignore
-import { createFromFetch } from "react-server-dom-webpack";
+import { createFromFetch } from "react-server-dom-webpack/client";
 import { ROUTE_PAYLOAD_HEADER } from "../shared/routePayloadHeader";
 
 // export function useRefresh() {

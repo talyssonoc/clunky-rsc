@@ -10,7 +10,7 @@ webpack(
   {
     mode: isProduction ? "production" : "development",
     devtool: isProduction ? "source-map" : "cheap-module-source-map",
-    entry: [resolve(__dirname, "./root.client.tsx")],
+    entry: [resolve(__dirname, "./root.tsx")],
     output: {
       path: resolve(__dirname, "../../build"),
       filename: "main.js",
@@ -24,7 +24,16 @@ webpack(
     module: {
       rules: [{ test: /\.(ts|tsx)$/, loader: "ts-loader" }],
     },
-    plugins: [new ReactServerWebpackPlugin({ isServer: false })],
+    plugins: [
+      new ReactServerWebpackPlugin({
+        isServer: false,
+        clientReferences: {
+          directory: resolve(__dirname, "../../src/ui/components"),
+          recursive: true,
+          include: /\.(js|ts|jsx|tsx)$/,
+        },
+      }),
+    ],
   },
   (err, stats) => {
     if (err) {

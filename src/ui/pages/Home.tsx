@@ -1,15 +1,14 @@
 import { Suspense } from "react";
-// @ts-ignore
-import { fetch } from "react-fetch";
-// import Counter from "../components/Counter.client";
+import { fetch } from "../../../_lib/client/reactFetch";
+import Counter from "../components/Counter";
 
-function Home() {
-  const data = fetch("http://localhost:3000/sleep/1000").json();
+async function Home() {
+  const data = await getData();
 
   return (
     <div>
       Teste {data.ok}
-      {/* <Counter /> */}
+      <Counter />
       <Suspense fallback={<div>Loading</div>}>
         <HomeContent />
       </Suspense>
@@ -21,6 +20,12 @@ function HomeContent() {
   const data = fetch("http://localhost:3000/sleep/3000").json();
 
   return <div>{data.ok}</div>;
+}
+
+async function getData(): Promise<{ ok: string }> {
+  return new Promise((res) => {
+    setTimeout(() => res({ ok: "loaded" }), 2000);
+  });
 }
 
 export { Home };
